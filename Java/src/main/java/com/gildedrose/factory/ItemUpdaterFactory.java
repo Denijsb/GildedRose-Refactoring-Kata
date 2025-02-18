@@ -1,6 +1,7 @@
 package com.gildedrose.factory;
 
 import com.gildedrose.model.Item;
+import com.gildedrose.model.ItemTypeEnum;
 import com.gildedrose.updater.SulfurasUpdater;
 import com.gildedrose.updater.AgedBrieUpdater;
 import com.gildedrose.updater.BackstagePassUpdater;
@@ -11,14 +12,16 @@ import com.gildedrose.updater.ItemUpdater;
 public class ItemUpdaterFactory {
 
     public static ItemUpdater getUpdater(final Item item) {
-        switch (item.name) {
-            case "Aged Brie":
+        final ItemTypeEnum itemType = ItemTypeEnum.fromString(item.name);
+
+        switch (itemType) {
+            case AGED_BRIE:
                 return new AgedBrieUpdater(item);
-            case "Backstage passes to a TAFKAL80ETC concert":
+            case BACKSTAGE_PASSES:
                 return new BackstagePassUpdater(item);
-            case "Sulfuras, Hand of Ragnaros":
+            case SULFURAS:
                 return new SulfurasUpdater(item);
-            case "Conjured":
+            case CONJURED:
                 return new ConjuredUpdater(item);
             default:
                 return new RegularItemUpdater(item);
